@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('titulo', 100);
             $table->text('descricao')->nullable();
             $table->decimal('valor_objetivo', 10, 2);
-            $table->decimal('valor_atual', 10, 2)->default(0);
+            // $table->decimal('valor_atual', 10, 2)->default(0);
             $table->date('data_inicio');
             $table->date('data_objetivo');
             $table->enum('categoria', ['emergencia', 'investimento', 'compra', 'viagem', 'outros']);

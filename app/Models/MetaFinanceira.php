@@ -45,6 +45,19 @@ class MetaFinanceira extends Model
         return $this->hasMany(MovimentacaoMeta::class, 'meta_id');
     }
 
+    public function getValorAtualAttribute(): float
+    {
+        return $this->movimentacoes()
+            ->selectRaw('
+                SUM(CASE 
+                    WHEN tipo = "deposito" THEN valor 
+                    WHEN tipo = "retirada" THEN -valor 
+                    ELSE 0 
+                END) as total
+            ')
+            ->value('total') ?? 0;
+    }
+
     // Accessors
     public function getProgressoAttribute(): float
     {
