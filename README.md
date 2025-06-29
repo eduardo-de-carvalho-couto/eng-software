@@ -13,7 +13,6 @@ Crie o Arquivo .env
 cp .env.example .env
 ```
 
-
 **Se preferir**, atualize essas variáveis de ambiente no arquivo .env
 ```dosini
 APP_NAME="App Name"
