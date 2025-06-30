@@ -1,0 +1,51 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          
+      - name: Install Dependencies
+        run: composer install
+        
+      - name: Run Tests
+        run: ./vendor/bin/pest
+
+  # deploy:
+  #   name: Deploy to Digital Ocean
+  #   runs-on: ubuntu-22.04
+  #   needs: test
+  #   steps:
+  #      - name: Deploy
+  #        uses: appleboy/ssh-action@v0.1.8
+  #        with:
+  #           host: ...
+  #           port: 22
+  #           username: dev
+  #           key: ${{secrets.PRIVATE_KEY}}
+  #           script: "
+  #             cd www;
+
+  #             git pull origin main;
+
+  #             composer install --optimize-autoloader --no-dev;
+
+  #             php artisan optimize:clear;
+  #             php artisan optimize;
+
+  #             sudo service php8.4-fpm reload;
+  #             sudo service supervisor restart;
+  #           "
