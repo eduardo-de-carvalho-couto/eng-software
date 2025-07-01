@@ -43,7 +43,7 @@ jobs:
          with:
             host: 137.184.130.33
             port: 22
-            username: dev
+            username: eduardo
             key: ${{secrets.PRIVATE_KEY}}
             script: "
               cd www;
