@@ -33,28 +33,28 @@ jobs:
       - name: Run Tests
         run: ./vendor/bin/pest
 
-  # deploy:
-  #   name: Deploy to Digital Ocean
-  #   runs-on: ubuntu-22.04
-  #   needs: test
-  #   steps:
-  #      - name: Deploy
-  #        uses: appleboy/ssh-action@v0.1.8
-  #        with:
-  #           host: ...
-  #           port: 22
-  #           username: dev
-  #           key: ${{secrets.PRIVATE_KEY}}
-  #           script: "
-  #             cd www;
+  deploy:
+    name: Deploy to Digital Ocean
+    runs-on: ubuntu-22.04
+    needs: test
+    steps:
+       - name: Deploy
+         uses: appleboy/ssh-action@v0.1.8
+         with:
+            host: 137.184.130.33
+            port: 22
+            username: dev
+            key: ${{secrets.PRIVATE_KEY}}
+            script: "
+              cd www;
 
-  #             git pull origin main;
+              git pull origin main;
 
-  #             composer install --optimize-autoloader --no-dev;
+              composer install --optimize-autoloader --no-dev;
 
-  #             php artisan optimize:clear;
-  #             php artisan optimize;
+              php artisan optimize:clear;
+              php artisan optimize;
 
-  #             sudo service php8.4-fpm reload;
-  #             sudo service supervisor restart;
-  #           "
+              sudo service php8.4-fpm reload;
+              sudo service supervisor restart;
+            "
