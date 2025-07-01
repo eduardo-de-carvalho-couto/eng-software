@@ -55,5 +55,5 @@ jobs:
               php artisan optimize:clear;
               php artisan optimize;
 
-              sudo service php8.4-fpm reload;
+              sudo service php8.3-fpm reload;
             "
