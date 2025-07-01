@@ -46,7 +46,7 @@ jobs:
             username: eduardo
             key: ${{secrets.PRIVATE_KEY}}
             script: "
-              cd www;
+              cd eng-software;
 
               git pull origin main;
 
